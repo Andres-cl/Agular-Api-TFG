@@ -1,0 +1,8 @@
+{
+  "/v3/ffcompany.business/messages": {
+    "changeOrigin": true,
+    "target" : "https://api.mailgun.net",
+    "logLevel" : "debug",
+    "secure" : false
+ }
+}

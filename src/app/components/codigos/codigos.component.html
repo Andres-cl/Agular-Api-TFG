@@ -1,0 +1,30 @@
+<div style="padding: 10px" class="col-md-4" *ngFor="let codi of codigos;let i = index">
+  <div  class="card text-center border-success" style="padding: 5px">
+    Identificador: {{codi.id}}
+    <div class="card-header card-title  d-flex justify-content-between bg-dark align-items-center" style="background-color: #3b5998">
+      <h3 class="card-text text-white text-capitalize">
+         Codigo: {{ codi.codigo}}
+      </h3>
+      <button class="btn btn-danger" (click)="deleteCodigoo(''+codi.id, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <h4>
+        Descuento de : {{codi.descuento}}%
+      </h4>
+      <h5 *ngIf="codi.preciominimo > 0" class="card-text">
+        Precio minimo: {{codi.preciominimo}}€
+      </h5>
+      <h5 *ngIf="codi.validez != null" class="card-text">
+        Válido hasta: {{getFecha(codi)}}
+      </h5>
+      <a class="btn" style="background-color: #dfe3ee" [routerLink]="['/codigos/edit/',codi.id]">
+        Editar Código
+      </a>
+      <button [routerLink]="['/codigos/asignar/',codi.id]" class="btn btn-outline-dark btn-block mt-2">
+        Asignar Código
+      </button>
+    </div>
+  </div>
+</div>

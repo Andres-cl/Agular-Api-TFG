@@ -1,0 +1,31 @@
+<div class="col-md-6 offset-md-0 float-left">
+  <div class="card">
+    <div class="card-body">
+      <form #formulario="ngForm">
+        <div class="form-group">
+          <input required="true" type="text" name="pregunta" placeholder="Pregunta"
+                 [(ngModel)]="pregunta.pregunta" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <textarea required="true" name="respuesta" placeholder="Respuesta" [(ngModel)]="pregunta.respuesta" class="form-control"></textarea>
+        </div>
+        <button type="submit" [disabled]="formulario.invalid" class="btn btn-success btn-block" (click)="edit ? updatePregunta() : savePregunta()">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6 float-right">
+  <div class="card card-body text-center">
+    <h3>
+      {{pregunta.id}}.{{pregunta.pregunta == '' ? 'Pregunta....' : pregunta.pregunta}}
+    </h3>
+    <p>
+      {{pregunta.respuesta == '' ? 'Respuesta' : pregunta.respuesta}}
+    </p>
+
+  </div>
+</div>

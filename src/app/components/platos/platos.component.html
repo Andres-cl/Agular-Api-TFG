@@ -1,0 +1,29 @@
+<div style="padding: 10px" class="col-md-4" *ngFor="let plato of platos; let i = index">
+  <div  class="card border-success text-center" style="padding: 5px">
+    <h4 style="color: #3b5998">{{plato.tipoplato}}</h4>
+    <img [src]="plato.foto" class="card-img-top" width="500" height="300">
+    <div class="card-header card-title bg-dark d-flex justify-content-between align-items-center" style="background-color: #3b5998">
+      <h3 class="text-white text-capitalize">
+        {{ plato.nombre }}
+      </h3>
+      <button class="btn btn-danger" (click)="deletePlato(''+plato.id, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <p>
+        {{plato.descripcion}}
+      </p>
+      <h5 class="font-weight-bold">
+        {{plato.precio}} €
+      </h5>
+
+      <a class="btn " style="background-color: #dfe3ee" [routerLink]="['/platos/edit/',plato.id]">
+        Editar Plato
+      </a>
+    </div>
+    <div class="card-footer">
+      {{plato.calorias}} Kcals
+    </div>
+  </div>
+</div>

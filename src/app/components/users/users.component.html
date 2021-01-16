@@ -1,0 +1,93 @@
+<div class="col-12" *ngIf="adminAlert">
+  <div class="alert alert-danger alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!</strong> No pueden haber dos usuarios admin
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div id="accordion">
+    <div class="card" *ngFor="let user of users; let i = index;">
+      <div class="card-header" [id]="'heading'+i">
+        <h5 class="mb-0">
+          <button class="btn btn-link mt-1"  data-toggle="collapse" [attr.data-target]="'#collapse'+i" aria-expanded="false" [attr.aria-controls]="'collapse'+i">
+            <a class="text-capitalize">{{user.nombre }} - {{ user.rol}}</a>
+          </button>
+          <button class="float-right btn-danger btn-lg" *ngIf="!isAdmin(user)" (click)="deleteUser(user.id, i)">
+            <i class="far fa-trash-alt text-right"></i>
+          </button>
+        </h5>
+      </div>
+      <div [id]="'collapse'+i" class="collapse" [attr.aria-labelldby]="'heading'+i" data-parent="#accordion">
+        <div class="card-body row">
+          <div class="col-6">
+          <ul>
+            <li>Nombre: {{user.nombre}}</li>
+            <li>Usuario: {{user.usuario}}</li>
+            <li>Contraseña: {{user.password}}</li>
+          </ul>
+          </div>
+          <div class="col-6 text-right" *ngIf="!isAdmin(user)">
+          <button class="btn btn-outline-warning" (click)="abreEditar(user)">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-text text-center" *ngIf="nuevo">Nuevo Usuario:</h4>
+        <h4 class="card-text text-center" *ngIf="!nuevo">Editar Usuario:</h4>
+      </div>
+      <div class="card-body">
+        <form #form="ngForm" (ngSubmit)="addNewUser(form)">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" ngModel placeholder="Nombre" required="true">
+          </div>
+          <div class="form-group">
+            <label for="user">Usuario:</label>
+            <input type="text" class="form-control" id="user" name="usuario" ngModel  placeholder="Usuario" required="true">
+          </div>
+          <div class="form-group">
+            <label for="pass">Contraseña</label>
+            <input type="password" class="form-control" id="pass" name="password" ngModel placeholder="Contraseña" required="true">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control"   [ngModelOptions]="{standalone:true}" [(ngModel)]="pass2" placeholder="Repita contraseña" required="true">
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rol" ngModel id="admin" value="administrador" required="true">
+            <label class="form-check-label" for="admin">Administrador</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rol" ngModel id="nutri" value="nutricionista" required="true">
+            <label class="form-check-label" for="nutri">Nutricionista</label>
+          </div><br>
+          <button type="submit" class="btn btn-success btn-block mt-3" [disabled]="form.invalid || form.value.password != pass2">
+            <a *ngIf="nuevo">Añadir</a>
+            <a *ngIf="!nuevo">Modifica</a>
+          </button>
+          <button type="submit" class="btn btn-success btn-block mt-3" *ngIf="!nuevo" (click)="nuevo = true; form.resetForm(); pass2 = ''">Cancelar</button>
+        </form>
+      </div>
+    </div>
+    <div>
+    </div>
+  </div>
+<!--  <div class="col-md-6" *ngIf="!nuevo">-->
+<!--    <div class="card">-->
+<!--      <div class="card-header">-->
+<!--        <h4 class="card-text text-center">Modifica Usuario:</h4>-->
+<!--      </div>-->
+<!--      <div class="card-body">-->
+<!--        <form #form="ngForm" (ngSubmit)="addNewUser(form)">-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>

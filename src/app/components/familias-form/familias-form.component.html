@@ -1,0 +1,31 @@
+<div class="col-md-6 offset-md-0 float-left">
+  <div class="card">
+    <div class="card-body">
+      <form #formulario="ngForm">
+        <div class="form-group">
+          <input required="true" type="text" name="nombre" placeholder="Nombre"
+                 [(ngModel)]="familia.nombre" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <input required="true" name="contenido" placeholder="Contenido" [(ngModel)]="familia.descripcion" class="form-control">
+        </div>
+        <button type="submit" [disabled]="formulario.invalid" class="btn btn-success btn-block" (click)="edit ? updateFamilia() : saveFamilia()">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6 float-right">
+  <div class="card card-body text-center">
+    <h3>
+      {{familia.id}}.{{familia.nombre == '' ? 'Nombre Familia' : familia.nombre}}
+    </h3>
+    <p>
+      {{familia.descripcion == '' ? 'Descricpion' : familia.descripcion}}
+    </p>
+
+  </div>
+</div>

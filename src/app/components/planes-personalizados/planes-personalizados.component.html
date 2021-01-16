@@ -1,0 +1,24 @@
+<div style="padding: 10px" class="col-md-4" *ngFor="let plan of dietasPersonales;let i = index">
+  <div  class="card border-success text-center" style="padding: 5px">
+    <h4 class="text-capitalize" style="color: #3b5998">{{plan.sexo}}</h4>
+    <div class="card-header card-title d-flex bg-dark justify-content-between align-items-between">
+      <h4 class="text-white">
+        {{plan.edad}} años, {{plan.talla}}cm y {{plan.peso}}kg
+      </h4>
+      <button *ngIf="authService.isAdmin()" class="btn btn-danger" (click)="deletePlanPersonal(plan, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <p>
+        Objetivos : {{ plan.descripcion}}
+      </p>
+      <a class="btn " style="background-color: #dfe3ee" [routerLink]="['/plan-personal-info/',plan.id]">
+        Detalles De Solicitud
+      </a>
+    </div>
+    <div class="card-footer">
+    Dias de actividad: {{ plan.diasActividad}}
+  </div>
+  </div>
+</div>

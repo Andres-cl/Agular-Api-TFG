@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightslategrey">
+    <a  class="navbar-brand fas fa-utensils ml-5" routerLink="/">  FF - COMPANY</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#minavbar" aria-controls="minavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="minavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fas fa-users" style="color: black" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Productos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+          <a class="dropdown-item fas fa-clipboard-list" routerLink="/familias">  Ver Productos</a>
+          <a class="dropdown-item fas fa-plus-circle" routerLink="/familias/add">  Añadir Productos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fas fa-drumstick-bite" style="color: black"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Alimentos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item fas fa-clipboard-list" routerLink="/alimentos">  Ver Alimentos</a>
+          <a class="dropdown-item fas fa-plus-circle" routerLink="/alimentos/add">  Añadir Alimento</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fas fa-hamburger" style="color: black" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Platos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+          <a class="dropdown-item fas fa-clipboard-list" routerLink="/platos">  Ver Platos</a>
+          <a class="dropdown-item fas fa-plus-circle" routerLink="/platos/add">  Añadir Platos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fas fa-question" style="color: black" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          F.A.Q
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+          <a class="dropdown-item fas fa-clipboard-list" routerLink="/faq">  Ver F.A.Q</a>
+          <a class="dropdown-item fas fa-plus-circle" routerLink="/faq/add">  Añadir Pregunta</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle fas fa-percent" style="color: black" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Descuentos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown5">
+          <a class="dropdown-item fas fa-clipboard-list" routerLink="/codigos">  Ver Códigos</a>
+          <a class="dropdown-item fas fa-plus-circle" routerLink="/codigos/add">  Añadir Código</a>
+        </div>
+      </li>
+      <li class="nav-item ml-1">
+        <a class="nav-link fas fa-clipboard-list" style="color: black" routerLink="planes-personalizados"> Dietas Personales</a>
+      </li>
+      <li class="nav-item ml-1" *ngIf="authService.isAdmin()">
+        <a class="nav-link fas fa-users-cog btn" style="color: black" routerLink="/users"> USERS</a>
+      </li>
+      <li class="nav-item ml-3" *ngIf="authService.getCurrentUser() != null">
+        <i class="nav-link fas fa-sign-out-alt btn" style="color: black" (click)="onLogOut()"></i>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,21 @@
+<div style="padding: 10px" class="col-md-4" *ngFor="let familia of familias;let i = index">
+  <div  class="card border-success text-center" style="padding: 5px">
+    <h4 class="font-weight-normal" style="color: #3b5998">PRODUCTO:{{ familia.id}}</h4>
+    <div class="card-header card-title bg-dark  d-flex justify-content-between align-items-center" style="background-color: #3b5998">
+      <h3 class="card-text text-white text-capitalize">
+        {{ familia.nombre }}
+      </h3>
+      <button class="btn btn-danger" (click)="eliminaFamilia(familia.id, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <p class="card-text font-weight-normal">
+        {{familia.descripcion}}
+      </p>
+      <a  class="btn mt-1" style="background-color: #dfe3ee" [routerLink]="['/familias/edit/',familia.id]">
+        Editar Producto
+      </a>
+    </div>
+  </div>
+</div>

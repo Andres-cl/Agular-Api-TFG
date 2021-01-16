@@ -1,0 +1,25 @@
+<div style="padding: 10px" class="col-md-3" *ngFor="let alimento of alimentos; let i = index">
+  <div  class="card border-success text-center" style="padding: 5px">
+    <h4 style="color: #3b5998" class="font-weight-normal">{{alimento.tipoalimento}}</h4>
+    <img [src]="alimento.foto" class="card-img-top" width="500" height="200">
+    <div class="card-header card-title d-flex bg-dark justify-content-between align-items-center">
+      <h3 class="text-white text-capitalize">
+        {{ alimento.nombre }}
+      </h3>
+      <button class="btn btn-danger ml-2" (click)="deleteAlimento(''+alimento.id, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <h5 class="text-decoration-underline">
+        {{alimento.precio}} €
+      </h5>
+      <a class="btn " style="background-color: #dfe3ee" [routerLink]="['/alimentos/edit/',alimento.id]">
+        Editar Alimento
+      </a>
+    </div>
+    <div class="card-footer">
+      {{alimento.calorias}} Kcals
+    </div>
+  </div>
+</div>

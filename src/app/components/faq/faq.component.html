@@ -1,0 +1,20 @@
+<div style="padding: 10px" class="col-md-4" *ngFor="let pregunta of preguntas; let i = index">
+  <div  class="card border-success text-center" style="padding: 5px">
+    <div class="card-header card-title  d-flex justify-content-between bg-dark align-items-center p-2">
+      <h3 class="card-text text-white text-capitalize">
+        {{ pregunta.pregunta }}
+      </h3>
+      <button class="btn btn-danger" (click)="eliminaFamilia(pregunta.id, i)">
+        <i class="far fa-trash-alt"></i>
+      </button>
+    </div>
+    <div style="background-color: #8b9dc3" class="card-body">
+      <p class="card-text">
+        {{pregunta.respuesta}}
+      </p>
+      <a class="btn" style="background-color: #dfe3ee" [routerLink]="['/faq/edit/',pregunta.id]">
+        Editar Pregunta
+      </a>
+    </div>
+  </div>
+</div>

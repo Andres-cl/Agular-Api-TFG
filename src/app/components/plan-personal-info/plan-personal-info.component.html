@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col">
+    <div class="card ">
+      <div class="card-header">
+        <h3 class="card-text text-center">
+          Datos del solicitante
+        </h3>
+      </div>
+      <div class="card-body card-text">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h5>Sexo:</h5>
+            <h5 class="text-capitalize" style="color: grey">{{ plan.sexo}}</h5>
+          </li>
+          <li class="list-group-item">
+            <h5>Nombre:</h5>
+            <h5 style="color: grey">{{ solicitante.nombre}}</h5>
+          </li>
+          <li class="list-group-item">
+            <h5>Apellidos:</h5>
+            <h5 style="color: grey">{{ solicitante.apellidos}}</h5>
+          </li>
+        <li class="list-group-item">
+          <h5>Edad:</h5>
+          <h5 style="color: grey">{{ plan.edad}}</h5>
+        </li>
+        <li class="list-group-item">
+          <h5>Teléfono:</h5>
+          <h5 style="color: grey">{{ solicitante.telefono}}</h5>
+        </li>
+        <li class="list-group-item">
+          <h5>Mail:</h5>
+          <h5 style="color: grey">{{ solicitante.correo}}</h5>
+        </li>
+        <li class="list-group-item">
+          <h5>Talla:</h5>
+          <h5 style="color: grey">{{ plan.talla}}cm</h5>
+        </li>
+        <li class="list-group-item">
+          <h5>Peso:</h5>
+          <h5 style="color: grey">{{ plan.peso}}kg</h5>
+        </li>
+        <li class="list-group-item ">
+          <h5>Dias de actividad semanal:</h5>
+          <h5 style="color: grey">{{ plan.diasActividad}}</h5>
+        </li>
+          <li class="list-group-item d-block">
+            <h5>Objetivos:</h5>
+            <h5 style="color: grey">{{ plan.descripcion}}</h5>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header text-center">
+        <h3 class="card-text">
+          Alimentos no deseados
+        </h3>
+      </div>
+      <div class="card-body card-text">
+        <ul class="list-group list-group-flush" *ngIf="alimentosIndeseados.length > 0">
+          <li class="list-group-item " *ngFor="let a of alimentosIndeseados">
+            <ngx-avatar [src]="a.foto"></ngx-avatar>
+            <h5 class="card-text mt-3">{{a.nombre}}</h5>
+          </li>
+        </ul>
+        <h5 class="text-center" *ngIf="!alimentosIndeseados.length > 0">El cliente no tiene restricciones</h5>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header text-center">
+        <h3 class="card-text">
+          Platos no deseados
+        </h3>
+      </div>
+      <div class="card-body card-text">
+        <ul class="list-group list-group-flush" *ngIf="platosIndeseados.length > 0">
+          <li class="list-group-item " *ngFor="let a of platosIndeseados">
+            <ngx-avatar [src]="a.foto"></ngx-avatar>
+            <h5 class="card-text mt-3">{{a.nombre}}</h5>
+          </li>
+        </ul>
+        <h5 class="text-center" *ngIf="!platosIndeseados.length > 0">El cliente no tiene restricciones</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center mt-4 mb-4">
+  <div class="col-4">
+    <button class="btn btn-block btn-success" [routerLink]="'/rellena-dieta/'+solicitante.id+'/'+idPlan">Rellenar plan semanal</button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+h4 {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+li{
+  display: flex;
+  justify-content: space-between;
+}
+.precio{
+  justify-content: center;
+}
+img {
+  max-height: 400px;
+}

@@ -1,0 +1,23 @@
+.active{
+  background-color: #8b9dc3;
+  border-color: #8b9dc3;
+}
+/*#dialog-window {*/
+/*  max-height: 1000px;*/
+/*}*/
+
+#scrollable-content {
+  height: 750px;
+  overflow: auto;
+}
+.gg{
+  border: transparent;
+}
+
+li {
+  justify-content: space-between;
+  display: flex;
+}
+.normal {
+  font-weight: normal;
+}

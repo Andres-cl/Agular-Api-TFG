@@ -1,0 +1,88 @@
+<!--
+<div class="d-flex flex-row bd-highlight mb-2 justify-content-between" style="padding: 10px" >
+  -->
+<div class="d-flex bd-highlight flex-wrap" style="padding: 20px; ">
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class="card h-100 border-success text-center" style="background-color: lightslategrey">
+      <div id="carruselPlatos" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{plato}}" width="500" height="300" class="card-img-top" alt="...">
+          </div>
+          <div class="carousel-item" *ngFor="let plato of platos">
+            <img src="{{plato.foto}}" class="card-img-top" width="500" height="300" alt="...">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Platos</h5>
+        <p class="card-text">En esta seccion encontrarás todo la informacion de los platos existentes en la base de
+          datos de FF company, pudientdo listarlos, modificaros, o añadirlos</p>
+        <a routerLink="/platos" class="btn btn-success">Platos</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class=" border-success card h-100 text-center">
+      <div id="CarruselAlimentos" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{alimento}}" class="card-img-top" width="500" height="300" alt="...">
+          </div>
+          <div class="carousel-item" *ngFor="let alimento of alimentos">
+            <img src="{{alimento.foto}}" class="card-img-top" width="500" height="300" alt="...">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Alimentos</h5>
+        <p class="card-text">Seccion en la que podras acceder a todos los registros de Alimentos almacenados en nuestra
+          base de datos para poder hacer una gestion de ellos</p>
+        <a routerLink="/alimentos" class="btn btn-success">Alimentos</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class=" border-success card h-100 text-center align-items-center" style="background-color: lightslategrey">
+      <img src="/assets/saludable2.jpg" class="card-image-top miprueba" alt="">
+      <div class="card-body">
+        <h5 class="card-title">Productos</h5>
+        <p class="card-text">Seccion desde la cual podras trabajar con toda la informacion referente a los tipos de
+          servicios y productos que ofrecera la compañia</p>
+        <a routerLink="/familias" class="btn btn-success">Productos</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class=" border-success card h-100 text-center align-items-center">
+      <img src="/assets/faq.png" class="card-image-top img-fluid" alt="">
+      <div class="card-body">
+        <h5 class="card-title">F.A.Q</h5>
+        <p class="card-text">Seccion desde la cual podras trabajar acceder y trabajar con todas las preguntas de interes
+          de nuestros usuarios, modificarlas y crear nuevas </p>
+        <a routerLink="/faq" class="btn btn-success">F.A.Q</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class="border-success card h-100 text-center align-items-center" style="background-color: lightslategrey">
+      <img src="/assets/promoo.png" class="card-image-top img-fluid" alt="">
+      <div class="card-body">
+        <h5 class="card-title">Códigos de Descuento</h5>
+        <p class="card-text">Seccción donde podras ver editar borrar y dar de alta nuevos códigos para los clientes de
+          la aplicación </p>
+        <a routerLink="/codigos" class="btn btn-success">Códigos</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12 p-2">
+    <div class=" border-success card h-100 text-center align-items-center">
+      <img src="/assets/ppp.jpg" class="card-image-top  img-fluid" alt="">
+      <div class="card-body">
+        <h5 class="card-title">Dietas Personalizadas</h5>
+        <p class="card-text">Sección para ver, gestionar y rellenar solicitudes de planes semanales de clientes de la app. </p>
+        <a routerLink="/planes-personalizados" class="btn btn-success">Dietas</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,196 @@
+<body>
+<div class="row">
+  <div class="col-6">
+    <div class="container">
+      <div class="row">
+        <div class="col" *ngFor="let dia of [1,2,3,4,5]">
+          <h5 class="text-center">{{getDia(dia)}}</h5>
+        </div>
+      </div>
+      <div class="row" *ngFor="let row of [0,1,2]">
+        <div class="col micol borde" (click)="rellenaHueco(getIndex(row,col))"
+             *ngFor="let col of [0,1,2,3,4]">
+          <img *ngIf="fotosPlan[getIndex(row,col)] != null" alt="" class="imgPlan" [src]="fotosPlan[getIndex(row,col)]">
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="popoverpesado" class="col btn" (click)="abrirInfoNutricion(nutri)" *ngFor="let nutri of [0,1,2,3,4]" data-toggle='popover'  data-placement="bottom" title="Información Nutricional"
+             [attr.data-content]="'Proteinas: '+nutricionPlan[nutri].proteinas + ' Hidratos: '+nutricionPlan[nutri].hidratos
+            +' Grasas: '+nutricionPlan[nutri].grasas + ' Calorias: '+nutricionPlan[nutri].calorias">
+          <h5 class="text-center">{{nutricionPlan[nutri].calorias}}<br>Kcals</h5>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3" *ngIf="infoDia > -1">
+        <div class="col-8">
+          <div class="card">
+            <div class="card-header text-center">
+              <h4>Información nutricional del {{getDia(infoDia+1)}}</h4>
+            </div>
+            <div class="card-body">
+              <div>
+                <h5 class="mx-5 mt-3 card-text d-flex justify-content-between">Proteinas: <span
+                  class="badge badge-pill badge-success">{{nutricionPlan[infoDia].proteinas}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Carbohidratos: <span
+                  class="badge badge-pill badge-success">{{nutricionPlan[infoDia].hidratos}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Grasas: <span
+                  class="badge badge-pill badge-success">{{nutricionPlan[infoDia].grasas}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Calorias: <span
+                  class="badge badge-pill badge-success">{{nutricionPlan[infoDia].calorias}}</span></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4" *ngIf="precioPlan != undefined && precioPlan > 0 ">
+        <div class="d-flex justify-content-around">
+          <h5>Precio Plan: {{precioPlan | currency:'EUR'}}</h5>
+          <h5>Precio Servicios: {{10 | currency:'EUR'}}</h5>
+        </div>
+        <h4 class="text-center">Precio Total: {{precioPlan+20 | currency:'EUR'}}</h4>
+      </div>
+    </div>
+    <div *ngIf="planValido()">
+      <button class="btn btn-block btn-info" [disabled]="loading2" [class.spinner]="loading2" (click)="addPlanPersonal()">Añadir Plan Semanal</button>
+    </div>
+  </div>
+  <div class="col-6" *ngIf="rellena">
+    <div class="container">
+      <h4 class="text-center">Rellenando: {{getComida(indice)}}</h4>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header text-center" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link " data-toggle="collapse" data-target="#platos" aria-expanded="false"
+                      aria-controls="platos">
+                Clic para rellenar plato
+              </button>
+            </h5>
+          </div>
+          <div id="platos" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="plato">Elige Plato:</label>
+                <select #platito name="plato" [(ngModel)]="platoSeleccionado" class="custom-select" id="plato">
+                  <option disabled selected [value]="''">Selecciona Plato</option>
+                  <option *ngFor="let plato of platos" [disabled]="isValidOption('plato',plato.id)" [ngValue]="plato">{{plato.nombre}}</option>
+                </select>
+              </div>
+              <div *ngIf="platoSeleccionado.id != null">
+                <img alt="" class="card-img" height="200px" [src]="platoSeleccionado.foto">
+                <h4 class="mt-4 text-center" style="text-decoration: underline">
+                  Información nutricional
+                </h4>
+                <div>
+                  <h5 class="mx-5 mt-3 card-text d-flex justify-content-between">Proteinas: <span
+                    class="badge badge-pill badge-info">{{platoSeleccionado.proteinas}}</span></h5>
+                  <h5 class="mx-5 card-text d-flex justify-content-between">Carbohidratos: <span
+                    class="badge badge-pill badge-info">{{platoSeleccionado.hidratos}}</span></h5>
+                  <h5 class="mx-5 card-text d-flex justify-content-between">Grasas: <span
+                    class="badge badge-pill badge-info">{{platoSeleccionado.grasas}}</span></h5>
+                  <h5 class="mx-5 card-text d-flex justify-content-between">Calorias: <span
+                    class="badge badge-pill badge-info">{{platoSeleccionado.calorias}}</span></h5>
+                </div>
+                <div class="mx-5 mt-4">
+                  <button (click)="addPlato()" class="btn btn-info btn-block">Añadir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header text-center" id="persTupper">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#tuppers" aria-expanded="false"
+                      aria-controls="tuppers">
+                Clic para personalizar Tupper
+              </button>
+            </h5>
+          </div>
+          <div id="tuppers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row justify-content-around">
+                <div class="col-5">
+                  <label for="prote">Elige Proteina:</label>
+                  <select  name="prote" (change)="modificaDatosTupper()" [(ngModel)]="alimentosBase[0].alimento"
+                          class="custom-select"
+                          id="prote" required="true">
+                    <option disabled selected [value]="''">Selecciona Proteina</option>
+                    <option *ngFor="let prote of proteinas" [disabled]="isValidOption('alimento',prote.id)" [ngValue]="prote">{{prote.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-5">
+                  <label for="cantProte">Cantidad:</label>
+                  <select  name="cantProte" (change)="modificaDatosTupper()"
+                          [(ngModel)]="alimentosBase[0].cantidad" class="custom-select" id="cantProte">
+                    <option *ngFor="let c of [0,50,100,150,200,250,300]" [value]="c">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-around">
+                <div class="col-5">
+                  <label for="carbo">Elige Carbohidrato:</label>
+                  <select  name="carbo" (change)="modificaDatosTupper()" [(ngModel)]="alimentosBase[1].alimento"
+                          class="custom-select" id="carbo">
+                    <option disabled selected [value]="''">Selecciona Carbohidrato</option>
+                    <option *ngFor="let carbo of carbohidratos" [disabled]="isValidOption('alimento',carbo.id)" [ngValue]="carbo">{{carbo.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-5">
+                  <label for="centcarbo">Cantidad:</label>
+                  <select  name="centcarbo" (change)="modificaDatosTupper()"
+                          [(ngModel)]="alimentosBase[1].cantidad" class="custom-select" id="centcarbo">
+                    <option *ngFor="let c of [0,50,100,150,200,250,300]" [value]="c">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row justify-content-around">
+                <div class="col-5">
+                  <label for="verdu">Elige Verdura:</label>
+                  <select name="verdu" (change)="modificaDatosTupper()" [(ngModel)]="alimentosBase[2].alimento"
+                          class="custom-select" id="verdu">
+                    <option disabled selected [value]="''">Selecciona Verdura</option>
+                    <option *ngFor="let verdu of verduras" [disabled]="isValidOption('alimento',verdu.id)" [ngValue]="verdu">{{verdu.nombre}}</option>
+                  </select>
+                </div>
+                <div class="col-5">
+                  <label for="cantverdu">Cantidad:</label>
+                  <select  name="cantverdu" (change)="modificaDatosTupper()"
+                          [(ngModel)]="alimentosBase[2].cantidad" class="custom-select" id="cantverdu">
+                    <option *ngFor="let c of [0,50,100,150,200]" [value]="c">{{c}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3 justify-content-around">
+                <div class="col-8">
+                  <ng-multiselect-dropdown  name="extras" [data]="extras" [placeholder]="'Selecciona Extras'" [settings]="drowDown"
+                                           [(ngModel)]="extraList" (onSelect)="modificaExtras()" (onDeSelect)="modificaExtras()">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div *ngIf="alimentosTupper.length > 0 || extrasTupper.length>0">
+                <h5 class="mx-5 mt-3 card-text d-flex justify-content-between">Proteinas: <span
+                  class="badge badge-pill badge-info">{{nutricionalesTupper.proteinas}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Carbohidratos: <span
+                  class="badge badge-pill badge-info">{{nutricionalesTupper.hidratos}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Grasas: <span
+                  class="badge badge-pill badge-info">{{nutricionalesTupper.grasas}}</span></h5>
+                <h5 class="mx-5 card-text d-flex justify-content-between">Calorias: <span
+                  class="badge badge-pill badge-info">{{nutricionalesTupper.calorias}}</span></h5>
+              </div>
+              <div class="mt-4">
+                <button [disabled]="alimentosTupper.length<1 || loading" [class.spinner]="loading" (click)="addTupperPlan()" class="btn btn-block btn-info">
+                  Añadir Tupper
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3 text-center" *ngIf="huecosPlan[indice] != undefined">
+        <button class="btn btn-outline-danger" (click)="deleteHueco()">Eliminar Plato</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

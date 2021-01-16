@@ -1,0 +1,14 @@
+<!-- Footer -->
+
+<footer class="fixed-bottom footer d-flex justify-content-center" >
+  <!-- Copyright -->
+  <div class="align-self-center">© 2020 Copyright:
+    FF Company, todos los derechos reservados
+
+  </div>
+  <div *ngIf="getUser()" class="align-self-center copi">
+    <i class="capitalize">{{user.nombre | titlecase}} - {{user.rol | titlecase}}</i>
+  </div>
+
+</footer>
+

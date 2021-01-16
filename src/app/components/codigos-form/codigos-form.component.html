@@ -1,0 +1,71 @@
+<div class="col-md-6 float-left">
+  <div class="card">
+    <div class="card-body">
+      <form #formulario="ngForm">
+        <div class="form-group">
+          <input required="true" type="number" name="minimo" placeholder="Minimo precio a gastar"
+                 [(ngModel)]="codigo.preciominimo" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <label for="descuento">Elige Descuento:</label>
+          <select name="descuento" [(ngModel)]="codigo.descuento" class="form-control" id="descuento" required="true">
+            <option *ngFor="let tipo of descuentos" [value]="tipo">{{tipo}}</option>
+          </select>
+          <small>Descuento elegido: {{codigo.descuento}}</small>
+        </div>
+        <div class="form-group">
+        <input required="true" type="text" name="codigo" placeholder="Código" [(ngModel)]="codigo.codigo" class="form-control">
+      </div>
+        <div class="form-group">
+          <input aria-label="hola" required="false" type="date" name="validez" placeholder="Código" [(ngModel)]="codigo.validez" class="form-control">
+          <small *ngIf="codigo.validez != null">Fecha anterior: {{getFecha()}}</small>
+        </div>
+        <button type="submit" [disabled]="formulario.invalid" class="btn btn-success btn-block" (click)="edit ? updateCodigo() : saveCodigo()">
+          Guardar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6 float-right">
+  <div class="card card-body p-0 text-center">
+    <h3 class="mt-3">
+      {{codigo.id == 0 ? 'No hay identificador' : 'Identificador: '+codigo.id}}
+    </h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Descuento:
+        </h4>
+        <h4 *ngIf="codigo.descuento != null" class="mr-5">
+          {{codigo.descuento}}%
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Precio mínimo:
+        </h4>
+        <h4  class="mr-5">
+          {{codigo.preciominimo == 0 ? 'No tiene' : codigo.preciominimo+'€'}}
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Validez:
+        </h4>
+        <h4  class="mr-5">
+          {{codigo.validez == null ? 'No tiene Precio minimo' : getFecha()}}
+        </h4>
+      </li>
+      <li class="list-group-item precio">
+        <h2 class="font-weight-bolder p-0 m-0">
+          {{codigo.codigo == '' ? 'Código' : codigo.codigo}}
+        </h2>
+      </li>
+    </ul>
+
+  </div>
+</div>
+

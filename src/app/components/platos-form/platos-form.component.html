@@ -1,0 +1,121 @@
+<div class="row mb-5">
+<div class="col-md-6" style="padding-bottom: 50px">
+  <div class="card">
+    <div class="card-body">
+      <form #formulario="ngForm">
+        <div class="form-group">
+          <input required="true" type="text" name="nombre" placeholder="Nombre"
+                 [(ngModel)]="plato.nombre" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <input required="true" type="text" name="descripcion" placeholder="Descripcion"
+                 [(ngModel)]="plato.descripcion" class="form-control" autofocus>
+        </div>
+        <div class="form-group">
+          <input required="true" type="number" name="precio" placeholder="Precio" [(ngModel)]="plato.precio" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="url" name="image" placeholder="Imagen URL"
+                 [(ngModel)]="plato.foto" class="form-control">
+        </div>
+        <div class="form-group">
+          <input required="true" type="number" name="proteinas" placeholder="Proteinas"
+                 [(ngModel)]="plato.proteinas" class="form-control">
+        </div>
+        <div class="form-group">
+          <input required="true" type="number" name="carbohidratos" placeholder="Carbohidratos"
+                 [(ngModel)]="plato.hidratos" class="form-control">
+        </div>
+        <div class="form-group">
+          <input required="true" type="number" name="grasas" placeholder="Grasas"
+                 [(ngModel)]="plato.grasas" class="form-control">
+        </div>
+        <div class="form-group">
+          <input required="true" type="number" name="calorias" placeholder="Calorias"
+                 [(ngModel)]="plato.calorias" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="tipoplato">Elige Tipo:</label>
+          <select name="tipoplato" [(ngModel)]="plato.tipoplato" class="form-control" id="tipoplato" required="true">
+            <option *ngFor="let tipo of tipos" [value]="tipo">{{tipo}}</option>
+          </select>
+          <small>Tipo elegido: {{plato.tipoplato}}</small>
+        </div>
+        <div class="form-group">
+          <label for="valoracion">Valoracion del plato:</label>
+          <select name="tipoplato" [(ngModel)]="plato.valoracion" class="form-control" id="valoracion" required="true">
+            <option *ngFor="let tipo of [1,2,3,4,5]" [value]="tipo">{{tipo}}</option>
+          </select>
+          <small>Valoración elegida: {{plato.valoracion}}</small>
+        </div>
+        <button type="submit" [disabled]="formulario.invalid" class="btn btn-success btn-block" (click)="edit ? updatePlato() : savePlato()">
+          Guardar Plato
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class=" col-md-6 float-right">
+  <div class="card">
+  <img [src]="plato.foto == '' ? 'https://dubsism.files.wordpress.com/2017/12/image-not-found.png?w=547' : plato.foto" class="card-image-top">
+  <div class="card-body p-0 text-center">
+    <h3 class="mt-2">
+      {{plato.id}}.{{plato.nombre == '' ? 'Nombre Plato' : plato.nombre}}
+    </h3>
+    <p>
+      {{plato.descripcion == '' ? 'Descripción' : plato.descripcion}}
+    </p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Tipo:
+        </h4>
+        <h4 *ngIf="plato.tipoplato != null" class="mr-5">
+          {{plato.tipoplato}}
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Calorias:
+        </h4>
+        <h4 *ngIf="plato.calorias != null" class="mr-5">
+          {{plato.calorias}}
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Proteinas:
+        </h4>
+        <h4 *ngIf="plato.proteinas != null" class="mr-5">
+          {{plato.proteinas}}
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Grasas:
+        </h4>
+        <h4 *ngIf="plato.grasas != null" class="mr-5">
+          {{plato.grasas}}
+        </h4>
+      </li>
+      <li class="list-group-item">
+        <h4 class="ml-5">
+          Carbohidratos:
+        </h4>
+        <h4 *ngIf="plato.hidratos != null" class="mr-5">
+          {{plato.hidratos}}
+        </h4>
+      </li>
+      <li class="list-group-item precio">
+        <h3 class="font-weight-bolder p-0 m-0">
+          {{plato.precio == null ? 'Precio' : plato.precio + ' €'}}
+        </h3>
+      </li>
+    </ul>
+
+  </div>
+</div>
+</div>
+</div>
